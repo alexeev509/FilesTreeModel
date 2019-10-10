@@ -126,4 +126,43 @@ public class TxtFinderTest {
 
         Assert.assertEquals(expected, actual);
     }
+
+    @Test
+    public void testGetFilesWithTxtMethod_Fourth() throws Exception {
+        TxtFinder txtFinder = new TxtFinder();
+        List<File> filesForTest = createTxtFilesForFourthTest();
+        List<File> actual = txtFinder.getFilesWithTxt(filesForTest, "привет");
+
+        List<File> expected = new ArrayList<>(filesForTest);
+
+        Assert.assertEquals(expected, actual);
+    }
+
+
+    public List<File> createTxtFilesForFourthTest() throws IOException {
+        BufferedWriter bufferedWriter = null;
+        File file1;
+        try {
+            file1 = temporaryFolder.newFile("textTestFile1.txt");
+
+            bufferedWriter = new BufferedWriter(new FileWriter(file1));
+            textGeneratorWhereSearchWordOnTwoPages(bufferedWriter,file1);
+            bufferedWriter.flush();
+        } finally {
+            if (bufferedWriter != null) {
+                bufferedWriter.close();
+            }
+        }
+        return Arrays.asList(file1);
+
+    }
+
+    public void textGeneratorWhereSearchWordOnTwoPages(BufferedWriter bufferedWriter,File file) throws IOException {
+        char[] ch=new char[1024];
+        Arrays.fill(ch,0,ch.length, 'd');
+        ch[ch.length-2]='п';
+        ch[ch.length-1]='р';
+        bufferedWriter.write(ch);
+        bufferedWriter.write("ивет");
+    }
 }

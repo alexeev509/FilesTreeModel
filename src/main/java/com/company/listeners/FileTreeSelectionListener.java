@@ -25,7 +25,7 @@ public class FileTreeSelectionListener implements TreeSelectionListener {
             try {
                 txtReader.setBufferedReader(node);
                 String text = txtReader.readNextBytes();
-                window.addJTextArea(text);
+                window.addJTextArea(text,txtReader);
             }  catch (IOException e1) {
                 e1.printStackTrace();
             }

@@ -58,6 +58,7 @@ public class TxtFinder {
                     break;
                 }
                 String str = new String(buffer, 0, inputLenght);
+                System.out.println(str.length());
                 System.out.println(str);
                 for (int i = 0; i < str.length(); i++) {
                     if (str.charAt(i) == txtForSearch.charAt(counter)) {
