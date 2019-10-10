@@ -13,7 +13,7 @@ import java.io.IOException;
 public class TxtReader {
     private long positionInFileLastPage = 0;
     private long positionInFileFirstPage = 0;
-    BufferedReader bufferedReader;
+    private BufferedReader bufferedReader;
     private static final int SIZE_OF_BUFFER = 1024;
     private boolean previousScrollUp = true;
     private String path;
@@ -44,6 +44,7 @@ public class TxtReader {
         } else {
             //if we down before and up again
             previousScrollUp = true;
+            bufferedReader.close();
             bufferedReader = new BufferedReader(new FileReader(path));
             bufferedReader.skip(positionInFileLastPage * SIZE_OF_BUFFER);
             positionInFileFirstPage++;//??
@@ -63,8 +64,8 @@ public class TxtReader {
 //        if (!previousScrollUp) {
 //            previousScrollUp = false;
         //Если мы начальна страница не нулевая
-        System.out.println("PREV POSITION: " + positionInFileFirstPage);
         if (positionInFileFirstPage - 1 >= 0) {
+            bufferedReader.close();
             bufferedReader = new BufferedReader(new FileReader(path));
             positionInFileFirstPage--;
             positionInFileLastPage--;
@@ -73,7 +74,6 @@ public class TxtReader {
             text = new String(chars, 0, countOfReadChars);
             previousScrollUp = false;
         }
-//        }
 
 
         return text;

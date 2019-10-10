@@ -5,16 +5,9 @@ import com.company.listeners.ButtonOpenDirectoryActionListener;
 import com.company.listeners.ScrollAdjustmentListener;
 
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import javax.swing.text.DefaultCaret;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.awt.event.AdjustmentEvent;
-import java.awt.event.AdjustmentListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyVetoException;
-import java.beans.VetoableChangeListener;
 
 public class MainWindow extends JFrame {
 
@@ -28,9 +21,17 @@ public class MainWindow extends JFrame {
     private JLabel extensionOfFileLabel = new JLabel("Напишите расширение для файла");
     private GridBagConstraints c = new GridBagConstraints();
     private JTextArea textArea = new JTextArea();
-
+    private JScrollPane paneOfArea = new JScrollPane(textArea);
+    private boolean textAreaWasAddedOnPanel = false;
+        //Customize init block for elements:
     {
         fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        textArea.setLineWrap(true);
+        //Set JScrollPane on the top (without this ScrollAdjustmentListener will be scrollBar.getValue() + extent==scrollBar.getMaximum() true
+        //because Caret on the top
+        textArea.setCaretPosition(0);
+        ((DefaultCaret)textArea.getCaret()).setUpdatePolicy(DefaultCaret.NEVER_UPDATE);
+
     }
 
     public MainWindow() throws HeadlessException {
@@ -47,7 +48,6 @@ public class MainWindow extends JFrame {
     private void addElementsToWindow() {
         addActionListeners();
 
-//        panel.setLayout();
 
 
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -89,28 +89,19 @@ public class MainWindow extends JFrame {
     }
 
     public void addJTextArea(String text, TxtReader txtReader) {
-        boolean bb = true;
-        for (int i = 0; i < panel.getComponentCount(); i++) {
-            if (panel.getComponent(i) instanceof JTextArea) {
-                bb = false;
-            }
-        }
 
-        if (bb == true) {
+
+        if (!textAreaWasAddedOnPanel) {
             setXandYForComponents(1, 3);
             c.ipady = 400;
-            textArea.setLineWrap(true);
             textArea.setText(text);
-            final JScrollPane paneOfArea = new JScrollPane(textArea);
-            //Set JScrollPane on the top (without this ScrollAdjustmentListener will be scrollBar.getValue() + extent==scrollBar.getMaximum() true
-            //because Caret on the top
-            textArea.setCaretPosition(0);
-            ((DefaultCaret)textArea.getCaret()).setUpdatePolicy(DefaultCaret.NEVER_UPDATE);
+
             panel.add(paneOfArea, c);
             revalidate();
             paneOfArea.getVerticalScrollBar().addAdjustmentListener(new ScrollAdjustmentListener(txtReader, this));
-
-        } else {
+            textAreaWasAddedOnPanel=true;
+        }
+        else {
             textArea.setText(text);
         }
     }
@@ -126,29 +117,25 @@ public class MainWindow extends JFrame {
                     textAreaCurrentText.append(text);
                     textArea.setText(textAreaCurrentText.toString());
                 } else {
-                    System.out.println("Len " + textAreaCurrentText.length());
                     textArea.append(text);
                 }
-                System.out.println("UP: "+textArea.getText());
+//                System.out.println("UP: "+textArea.getText());
                 break;
             case ScrollAdjustmentListener.DOWN_SCROLL:
                 textAreaCurrentText = new StringBuilder(textArea.getText().substring(0,1024*3));
                 System.out.println(textArea.getText().substring(0,1024*3)+" Las symbol");
-//                textAreaCurrentText.delete(1024 * 2, 1024 * 3 + 1);
-//                textAreaCurrentText.delete(0, 1024);
+
                 textArea.setText(new StringBuilder(text).append(textAreaCurrentText).toString());
-                System.out.println("DOWN: "+textArea.getText());
+//                System.out.println("DOWN: "+textArea.getText());
                 break;
         }
     }
 
-    int height;
+
 
     public void addTree(JTree jTree) {
 
         JScrollPane scrollpane = new JScrollPane(jTree);
-
-        height = scrollpane.getHeight();
         setXandYForComponents(0, 3);
         c.weighty = 1;
         c.ipady = 400;
