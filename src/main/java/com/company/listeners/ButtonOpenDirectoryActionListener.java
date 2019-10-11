@@ -1,8 +1,8 @@
 package com.company.listeners;
 
-import com.company.TxtFinder.FilesValidation;
-import com.company.TxtFinder.TxtFinder;
 import com.company.structures.FileTreeModel;
+import com.company.txt.classes.FilesValidation;
+import com.company.txt.classes.TxtFinder;
 import com.company.view.MainWindow;
 
 import javax.swing.*;
@@ -31,11 +31,12 @@ public class ButtonOpenDirectoryActionListener implements ActionListener {
             final File file = fileChooser.getCurrentDirectory();
 
             try {
-                List<File> filesWithTxt = txtFinder.getFilesWithTxt(filesValidation.findAllValidFilesInDirectoryBreadthSearch(file, window.getExtensionOfFileTextfield().getText()),
+                String extensionOfFile = window.getExtensionOfFileTextfield().getText();
+                List<File> filesWithTxt = txtFinder.getFilesWithTxt(filesValidation.findAllValidFilesInDirectoryBreadthSearch(file, extensionOfFile),
                         window.getTextForSearchTextfield().getText());
                 FileTreeModel fileTreeModel=new FileTreeModel(file.getAbsolutePath(),filesWithTxt);
                 JTree jTree = new JTree(fileTreeModel);
-                jTree.addTreeSelectionListener(new FileTreeSelectionListener(window));
+                jTree.addTreeSelectionListener(new FileTreeSelectionListener(window, extensionOfFile));
                 window.addTree(jTree);
             } catch (IOException e1) {
                 e1.printStackTrace();

@@ -1,8 +1,8 @@
 package com.company.view;
 
-import com.company.TxtFinder.TxtReader;
 import com.company.listeners.ButtonOpenDirectoryActionListener;
 import com.company.listeners.ScrollAdjustmentListener;
+import com.company.txt.classes.TxtReader;
 
 import javax.swing.*;
 import javax.swing.text.DefaultCaret;

@@ -1,4 +1,4 @@
-package com.company.TxtFinder;
+package com.company.txt.classes;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;

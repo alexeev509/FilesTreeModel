@@ -1,4 +1,4 @@
-import com.company.TxtFinder.TxtFinder;
+import com.company.txt.classes.TxtFinder;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;

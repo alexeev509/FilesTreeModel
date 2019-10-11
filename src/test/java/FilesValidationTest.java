@@ -1,4 +1,4 @@
-import com.company.TxtFinder.FilesValidation;
+import com.company.txt.classes.FilesValidation;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
@@ -9,7 +9,7 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.when;
 
 public class FilesValidationTest {
     @Rule

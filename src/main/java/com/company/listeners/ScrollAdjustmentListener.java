@@ -1,6 +1,6 @@
 package com.company.listeners;
 
-import com.company.TxtFinder.TxtReader;
+import com.company.txt.classes.TxtReader;
 import com.company.view.MainWindow;
 
 import javax.swing.*;
@@ -23,7 +23,7 @@ public class ScrollAdjustmentListener implements AdjustmentListener {
     public void adjustmentValueChanged(AdjustmentEvent e) {
         JScrollBar scrollBar = (JScrollBar) e.getAdjustable();
         int extent = scrollBar.getModel().getExtent();
-        System.out.println("1. Value: " + (scrollBar.getValue() + extent) + " Max: " + scrollBar.getMaximum());
+//        System.out.println("1. Value: " + (scrollBar.getValue() + extent) + " Max: " + scrollBar.getMaximum());
         try {
             if (scrollBar.getValue() + extent == scrollBar.getMaximum()) {
 
