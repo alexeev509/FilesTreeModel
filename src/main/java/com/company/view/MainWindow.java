@@ -17,8 +17,8 @@ public class MainWindow extends JFrame {
     private JPanel panel = new JPanel(new GridBagLayout());
     private JTextField textForSearchTextfield = new JTextField("привет", 20);
     private JTextField extensionOfFileTextfield = new JTextField("txt", 20);
-    private JLabel textForSearchLabel = new JLabel("Напишите текст для поиска:");
-    private JLabel extensionOfFileLabel = new JLabel("Напишите расширение для файла");
+    private JLabel textForSearchLabel = new JLabel("Напишите текст для поиска (с учетом регистра):");
+    private JLabel extensionOfFileLabel = new JLabel("Напишите расширение для файла (с учетом регистра)");
     private GridBagConstraints c = new GridBagConstraints();
     private JTextArea textArea = new JTextArea();
     private JScrollPane paneOfArea = new JScrollPane(textArea);

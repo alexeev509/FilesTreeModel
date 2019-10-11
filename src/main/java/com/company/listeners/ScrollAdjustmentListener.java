@@ -40,7 +40,7 @@ public class ScrollAdjustmentListener implements AdjustmentListener {
                 }
             }
         } catch (IOException e1) {
-            e1.printStackTrace();
+
         }
     }
 }

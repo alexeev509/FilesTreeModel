@@ -29,7 +29,7 @@ public class FileTreeSelectionListener implements TreeSelectionListener {
                 String text = txtReader.readNextBytes();
                 window.addJTextArea(text,txtReader);
             }  catch (IOException e1) {
-                e1.printStackTrace();
+
             }
         }
     }

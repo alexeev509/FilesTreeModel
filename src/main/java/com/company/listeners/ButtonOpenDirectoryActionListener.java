@@ -48,7 +48,7 @@ public class ButtonOpenDirectoryActionListener implements ActionListener {
                     jTree.addTreeSelectionListener(new FileTreeSelectionListener(window, extensionOfFile));
                     window.addTree(jTree);
                 } catch (IOException e1) {
-                    e1.printStackTrace();
+
                 }
             }
         }
