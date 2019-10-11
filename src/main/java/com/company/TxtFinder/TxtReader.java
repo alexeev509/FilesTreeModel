@@ -14,7 +14,7 @@ public class TxtReader {
     private long positionInFileLastPage = 0;
     private long positionInFileFirstPage = 0;
     private BufferedReader bufferedReader;
-    private static final int SIZE_OF_BUFFER = 1024;
+    public static final int SIZE_OF_BUFFER = 1024;
     private boolean previousScrollUp = true;
     private String path;
 

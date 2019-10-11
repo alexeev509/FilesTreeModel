@@ -17,6 +17,7 @@ public class ButtonOpenDirectoryActionListener implements ActionListener {
     private FilesValidation filesValidation=new FilesValidation();
     private TxtFinder txtFinder=new TxtFinder();
     private MainWindow window;
+    private final static String FILE_CHOOSER_APPROVE_BUTTON_TXT = "Открыть файл";
 
     public ButtonOpenDirectoryActionListener(MainWindow window) {
         this.window=window;
@@ -25,7 +26,7 @@ public class ButtonOpenDirectoryActionListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         JFileChooser fileChooser = window.getFileChooser();
-        int ret = fileChooser.showDialog(null, "Открыть файл");
+        int ret = fileChooser.showDialog(null, FILE_CHOOSER_APPROVE_BUTTON_TXT);
         if (ret == JFileChooser.APPROVE_OPTION) {
             final File file = fileChooser.getCurrentDirectory();
 

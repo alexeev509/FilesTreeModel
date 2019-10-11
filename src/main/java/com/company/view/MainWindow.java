@@ -24,6 +24,9 @@ public class MainWindow extends JFrame {
     private JScrollPane paneOfArea = new JScrollPane(textArea);
     private JScrollPane scrollpaneForTree;
     private boolean textAreaWasAddedOnPanel = false;
+    private final static String TITLE = "Files application";
+    private final static int WIDTH_OF_THE_FRAME = 700;
+    private final static int HEIGHT_OF_THE_FRAME = 700;
 
     //Customize init block for elements:
     {
@@ -37,13 +40,13 @@ public class MainWindow extends JFrame {
     }
 
     public MainWindow() throws HeadlessException {
-        super("Files application");
+        super(TITLE);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         addElementsToWindow();
 
-        setSize(700, 700);
+        setSize(WIDTH_OF_THE_FRAME, HEIGHT_OF_THE_FRAME);
         setVisible(true);
     }
 
@@ -104,8 +107,8 @@ public class MainWindow extends JFrame {
             case ScrollAdjustmentListener.UP_SCROLL:
                 textAreaCurrentText = new StringBuilder(textArea.getText());
 
-                if (textAreaCurrentText.length() > 1024 * 3) {
-                    textAreaCurrentText.delete(0, 1024);
+                if (textAreaCurrentText.length() > TxtReader.SIZE_OF_BUFFER * 3) {
+                    textAreaCurrentText.delete(0, TxtReader.SIZE_OF_BUFFER);
                     textAreaCurrentText.append(text);
                     textArea.setText(textAreaCurrentText.toString());
                 } else {
@@ -114,8 +117,8 @@ public class MainWindow extends JFrame {
 //                System.out.println("UP: "+textArea.getText());
                 break;
             case ScrollAdjustmentListener.DOWN_SCROLL:
-                if(textArea.getText().length()>=1024 * 3) {
-                    textAreaCurrentText = new StringBuilder(textArea.getText().substring(0, 1024 * 3));
+                if (textArea.getText().length() >= TxtReader.SIZE_OF_BUFFER * 3) {
+                    textAreaCurrentText = new StringBuilder(textArea.getText().substring(0, TxtReader.SIZE_OF_BUFFER * 3));
                 }else {
                     textAreaCurrentText = new StringBuilder(textArea.getText());
                 }

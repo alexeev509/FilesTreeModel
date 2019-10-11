@@ -1,42 +1,16 @@
 package com.company.TxtFinder;
 
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TxtFinder {
 
 
-//    public static void main(String[] args) throws IOException {
-//        String txtToFind = "Hello";
-//        int[] mass=new int[txtToFind.length()];
-//        BufferedReader bufferedReader = new BufferedReader(new FileReader("/Users/apathy/Desktop/ForTask/big.txt"));
-//        char[] buffer = new char[100];
-//        int inputLenght = 0;
-//        int counter=0;
-//        while (inputLenght != -1) {
-//            buffer=new char[1024];
-//            inputLenght = bufferedReader.read(buffer);
-//            String str = new String(buffer);
-//            System.out.println(str);
-//            for(int i=0;i<str.length();i++){
-//                if(str.charAt(i)==txtToFind.charAt(counter)){
-//                    mass[counter++]=1;
-//                    if(counter==mass.length-1){
-//                        System.out.println("we have find!");
-//                        break;
-//                    }
-//                }else if(str.charAt(i)==txtToFind.charAt(0)) {
-//                    mass=new int[txtToFind.length()];
-//                    counter=1;
-//                }else {
-//                    mass=new int[txtToFind.length()];
-//                    counter=0;
-//                }
-//            }
-//        }
-//    }
     //нельзя использовать pattern match из-за возможного стыка блоков при чтении
 
     public List<File> getFilesWithTxt(List<File> files, String txtForSearch) throws IOException {
@@ -64,7 +38,7 @@ public class TxtFinder {
                     if (str.charAt(i) == txtForSearch.charAt(counter)) {
                         mass[counter++] = 1;
                         if (counter == mass.length - 1) {
-                            System.out.println("we have find word in file " + currentFile.getName());
+//                            System.out.println("we have find word in file " + currentFile.getName());
                             filesWithSearchTxt.add(currentFile);
                             txtHasBeenFound = true;
                             break;
