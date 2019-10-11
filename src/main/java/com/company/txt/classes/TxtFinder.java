@@ -11,43 +11,61 @@ import java.util.List;
 public class TxtFinder {
 
 
-    //нельзя использовать pattern match из-за возможного стыка блоков при чтении
-
+    /*  ( We can't use pattern match, because first part of search word can be on first block
+    * second part of the word on second !)
+    * Algorithm:
+    *  txtForSearch = "server"
+    *  text of file: "absserver"
+    *  massForSearchWord=[0 0 0 0 0 0]
+    *  counter = 0;
+    *  s == a - no
+    *  s == b - no
+    *  s == s - yes
+    *  massForSearchWord=[1 0 0 0 0 0]
+    *  counter = 1;
+    *  e == s - no
+    *  s == s - yes
+    *  massForSearchWord=[1 0 0 0 0 0]
+    *  counter = 1;
+    *  e == e - yes
+    *  massForSearchWord=[1 1 0 0 0 0]
+    *  counter = 2;
+    *  etc
+    *  This algorithm can be slow for case: "serveserveserve...server"
+    * */
     public List<File> getFilesWithTxt(List<File> files, String txtForSearch) throws IOException {
         List<File> filesWithSearchTxt = new ArrayList<>();
 
         for (int j = 0; j < files.size(); j++) {
             File currentFile = files.get(j);
-            int[] mass = new int[txtForSearch.length()];
+            int[] massForSearchWord = new int[txtForSearch.length()];
             BufferedReader bufferedReader = new BufferedReader(new FileReader(currentFile.getAbsolutePath()));
             char[] buffer;
-            int inputLenght = 0;
+            int inputLength = 0;
             int counter = 0;
             boolean txtHasBeenFound = false;
 
             while (!txtHasBeenFound) {
                 buffer = new char[1024];
-                inputLenght = bufferedReader.read(buffer);
-                if (inputLenght == -1) {
+                inputLength = bufferedReader.read(buffer);
+                if (inputLength == -1) {
                     break;
                 }
-                String str = new String(buffer, 0, inputLenght);
-                System.out.println(str.length());
-                System.out.println(str);
+                String str = new String(buffer, 0, inputLength);
                 for (int i = 0; i < str.length(); i++) {
                     if (str.charAt(i) == txtForSearch.charAt(counter)) {
-                        mass[counter++] = 1;
-                        if (counter == mass.length - 1) {
+                        massForSearchWord[counter++] = 1;
+                        if (counter == massForSearchWord.length - 1) {
 //                            System.out.println("we have find word in file " + currentFile.getName());
                             filesWithSearchTxt.add(currentFile);
                             txtHasBeenFound = true;
                             break;
                         }
                     } else if (str.charAt(i) == txtForSearch.charAt(0)) {
-                        mass = new int[txtForSearch.length()];
+                        massForSearchWord = new int[txtForSearch.length()];
                         counter = 1;
                     } else {
-                        mass = new int[txtForSearch.length()];
+                        massForSearchWord = new int[txtForSearch.length()];
                         counter = 0;
                     }
                 }

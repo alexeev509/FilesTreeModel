@@ -114,7 +114,6 @@ public class MainWindow extends JFrame {
                 } else {
                     textArea.append(text);
                 }
-//                System.out.println("UP: "+textArea.getText());
                 break;
             case ScrollAdjustmentListener.DOWN_SCROLL:
                 if (textArea.getText().length() >= TxtReader.SIZE_OF_BUFFER * 3) {
@@ -124,7 +123,6 @@ public class MainWindow extends JFrame {
                 }
 
                 textArea.setText(new StringBuilder(text).append(textAreaCurrentText).toString());
-//                System.out.println("DOWN: "+textArea.getText());
                 break;
         }
     }
