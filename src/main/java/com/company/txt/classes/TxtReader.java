@@ -28,8 +28,6 @@ public class TxtReader {
     public String readNextBytes() throws IOException {
         String text = "";
         char[] chars = new char[SIZE_OF_BUFFER];
-//        bufferedReader.skip(positionInFile* SIZE_OF_BUFFER);
-        //Если до этого листали вверх и дальше листаем вверх
         if (previousScrollUp) {
             int countOfReadChars = bufferedReader.read(chars);
             if (countOfReadChars != -1) {
@@ -42,13 +40,12 @@ public class TxtReader {
                 }
             }
         } else {
-            //if we down before and up again
             previousScrollUp = true;
             bufferedReader.close();
             bufferedReader = new BufferedReader(new FileReader(path));
             bufferedReader.skip(positionInFileLastPage * SIZE_OF_BUFFER);
-            positionInFileFirstPage++;//??
-            positionInFileLastPage++;//??
+            positionInFileFirstPage++;
+            positionInFileLastPage++;
             int countOfReadChars = bufferedReader.read(chars);
             text = new String(chars, 0, countOfReadChars);
         }
@@ -60,10 +57,6 @@ public class TxtReader {
     public String readPreviousBytes() throws IOException {
         String text = "";
         char[] chars = new char[SIZE_OF_BUFFER];
-        //Если до этого листали вверх, а теперь начали вниз
-//        if (!previousScrollUp) {
-//            previousScrollUp = false;
-        //Если мы начальна страница не нулевая
         if (positionInFileFirstPage - 1 >= 0) {
             bufferedReader.close();
             bufferedReader = new BufferedReader(new FileReader(path));
@@ -79,9 +72,6 @@ public class TxtReader {
         return text;
     }
 
-    public long getPositionInFileLastPage() {
-        return positionInFileLastPage;
-    }
 
     public long getPositionInFileFirstPage() {
         return positionInFileFirstPage;

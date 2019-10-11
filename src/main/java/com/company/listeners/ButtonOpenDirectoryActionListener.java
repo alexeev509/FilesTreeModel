@@ -37,8 +37,7 @@ public class ButtonOpenDirectoryActionListener implements ActionListener {
             } else if ("".equals(textForSearch)) {
                 window.showMessageBox(MESSAGE_EMPTY_TEXT_FOR_SEARCH);
             } else {
-                final File file = fileChooser.getCurrentDirectory();
-
+                File file = fileChooser.getCurrentDirectory();
                 try {
 
                     List<File> filesWithTxt = txtFinder.getFilesWithTxt(filesValidation.findAllValidFilesInDirectoryBreadthSearch(file, extensionOfFile),

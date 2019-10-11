@@ -27,6 +27,7 @@ public class MainWindow extends JFrame {
     private final static String TITLE = "Files application";
     private final static int WIDTH_OF_THE_FRAME = 700;
     private final static int HEIGHT_OF_THE_FRAME = 700;
+    private ScrollAdjustmentListener scrollAdjustmentListener;
 
     //Customize init block for elements:
     {
@@ -85,7 +86,6 @@ public class MainWindow extends JFrame {
     }
 
     public void addJTextArea(String text, TxtReader txtReader) {
-
         if (!textAreaWasAddedOnPanel) {
             setXandYForComponents(1, 3);
             c.ipady = 400;
@@ -93,9 +93,13 @@ public class MainWindow extends JFrame {
 
             panel.add(paneOfArea, c);
             revalidate();
-            paneOfArea.getVerticalScrollBar().addAdjustmentListener(new ScrollAdjustmentListener(txtReader, this));
+            scrollAdjustmentListener = new ScrollAdjustmentListener(txtReader, this);
+            paneOfArea.getVerticalScrollBar().addAdjustmentListener(scrollAdjustmentListener);
             textAreaWasAddedOnPanel = true;
         } else {
+            paneOfArea.getVerticalScrollBar().removeAdjustmentListener(scrollAdjustmentListener);
+            scrollAdjustmentListener = new ScrollAdjustmentListener(txtReader, this);
+            paneOfArea.getVerticalScrollBar().addAdjustmentListener(scrollAdjustmentListener);
             textArea.setText(text);
         }
     }
