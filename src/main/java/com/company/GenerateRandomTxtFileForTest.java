@@ -46,7 +46,7 @@ public class GenerateRandomTxtFileForTest {
 
 
     public static void addTxtToFileFivePages() throws IOException {
-        String filePath = "/Users/apathy/Desktop/ForTask/third.txt";
+        String filePath = "/Users/apathy/Desktop/ForTask/third.log";
         String text = "Hello world!";
         BufferedWriter bufferedWriter = new BufferedWriter (new OutputStreamWriter(new FileOutputStream(filePath), StandardCharsets.UTF_8));
 

@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 public class MainWindow extends JFrame {
 
     private JFileChooser fileChooser = new JFileChooser();
-    private JButton btnOpenDir = new JButton("Открыть директорию");
+    private JButton btnOpenDir = new JButton("Выбрать папку для поиска файла");
     private ActionListener btnOpenDirAction;
     private JPanel panel = new JPanel(new GridBagLayout());
     private JTextField textForSearchTextfield = new JTextField("привет", 20);
@@ -141,6 +141,10 @@ public class MainWindow extends JFrame {
         c.ipady = 400;
         panel.add(scrollpaneForTree, c);
         revalidate();
+    }
+
+    public void showMessageBox(String text) {
+        JOptionPane.showMessageDialog(null, text);
     }
 
     public JTextField getTextForSearchTextfield() {
