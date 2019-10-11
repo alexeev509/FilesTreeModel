@@ -33,7 +33,7 @@ public class ButtonOpenDirectoryActionListener implements ActionListener {
                 List<File> filesWithTxt = txtFinder.getFilesWithTxt(filesValidation.findAllValidFilesInDirectoryBreadthSearch(file, window.getExtensionOfFileTextfield().getText()),
                         window.getTextForSearchTextfield().getText());
                 FileTreeModel fileTreeModel=new FileTreeModel(file.getAbsolutePath(),filesWithTxt);
-                final JTree jTree = new JTree(fileTreeModel);
+                JTree jTree = new JTree(fileTreeModel);
                 jTree.addTreeSelectionListener(new FileTreeSelectionListener(window));
                 window.addTree(jTree);
             } catch (IOException e1) {
