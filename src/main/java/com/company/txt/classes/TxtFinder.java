@@ -70,6 +70,7 @@ public class TxtFinder {
                     }
                 }
             }
+            bufferedReader.close();
         }
         return filesWithSearchTxt;
     }

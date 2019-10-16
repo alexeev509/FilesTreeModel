@@ -19,6 +19,8 @@ public class MainWindow extends JFrame {
     private JTextField extensionOfFileTextfield = new JTextField("txt", 20);
     private JLabel textForSearchLabel = new JLabel("Напишите текст для поиска (с учетом регистра):");
     private JLabel extensionOfFileLabel = new JLabel("Напишите расширение для файла (с учетом регистра)");
+    ImageIcon loadingIcon = new ImageIcon(MainWindow.class.getResource("/ajax-loader.gif"));
+    private JLabel loading = new JLabel("loading... ", loadingIcon, JLabel.CENTER);
     private GridBagConstraints c = new GridBagConstraints();
     private JTextArea textArea = new JTextArea();
     private JScrollPane paneOfArea = new JScrollPane(textArea);
@@ -67,6 +69,9 @@ public class MainWindow extends JFrame {
         panel.add(extensionOfFileLabel, c);
         setXandYForComponents(1, 1);
         panel.add(extensionOfFileTextfield, c);
+        setXandYForComponents(1, 2);
+        panel.add(loading, c);
+        loading.setVisible(false);
 
         c.weighty = 0.001;
         setXandYForComponents(0, 2);
@@ -105,7 +110,7 @@ public class MainWindow extends JFrame {
     }
 
     public void addText(String text, int scrollDirection) {
-        StringBuilder textAreaCurrentText=null;
+        StringBuilder textAreaCurrentText = null;
 
         switch (scrollDirection) {
             case ScrollAdjustmentListener.UP_SCROLL:
@@ -122,7 +127,7 @@ public class MainWindow extends JFrame {
             case ScrollAdjustmentListener.DOWN_SCROLL:
                 if (textArea.getText().length() >= TxtReader.SIZE_OF_BUFFER * 3) {
                     textAreaCurrentText = new StringBuilder(textArea.getText().substring(0, TxtReader.SIZE_OF_BUFFER * 3));
-                }else {
+                } else {
                     textAreaCurrentText = new StringBuilder(textArea.getText());
                 }
 
@@ -134,9 +139,6 @@ public class MainWindow extends JFrame {
 
     public void addTree(JTree jTree) {
 
-        if(scrollpaneForTree!=null){
-            panel.remove(scrollpaneForTree);
-        }
         scrollpaneForTree = new JScrollPane(jTree);
         setXandYForComponents(0, 3);
         c.weighty = 1;
@@ -159,5 +161,20 @@ public class MainWindow extends JFrame {
 
     public JFileChooser getFileChooser() {
         return fileChooser;
+    }
+    
+    public void startLoading() {
+        if (scrollpaneForTree != null) {
+            panel.remove(scrollpaneForTree);
+            panel.revalidate();
+            panel.repaint();
+        }
+        btnOpenDir.setEnabled(false);
+        loading.setVisible(true);
+    }
+
+    public void endLoading() {
+        loading.setVisible(false);
+        btnOpenDir.setEnabled(true);
     }
 }

@@ -38,17 +38,23 @@ public class ButtonOpenDirectoryActionListener implements ActionListener {
                 window.showMessageBox(MESSAGE_EMPTY_TEXT_FOR_SEARCH);
             } else {
                 File file = fileChooser.getCurrentDirectory();
-                try {
+                window.startLoading();
+                new Thread(() ->
 
-                    List<File> filesWithTxt = txtFinder.getFilesWithTxt(filesValidation.findAllValidFilesInDirectoryBreadthSearch(file, extensionOfFile),
-                            textForSearch);
-                    FileTreeModel fileTreeModel = new FileTreeModel(file.getAbsolutePath(), filesWithTxt);
-                    JTree jTree = new JTree(fileTreeModel);
-                    jTree.addTreeSelectionListener(new FileTreeSelectionListener(window, extensionOfFile));
-                    window.addTree(jTree);
-                } catch (IOException e1) {
+                {
+                    List<File> filesWithTxt = null;
+                    try {
+                        filesWithTxt = txtFinder.getFilesWithTxt(filesValidation.findAllValidFilesInDirectoryBreadthSearch(file, extensionOfFile),
+                                textForSearch);
+                        FileTreeModel fileTreeModel = new FileTreeModel(file.getAbsolutePath(), filesWithTxt);
+                        JTree jTree = new JTree(fileTreeModel);
+                        jTree.addTreeSelectionListener(new FileTreeSelectionListener(window, extensionOfFile));
+                        window.addTree(jTree);
+                        window.endLoading();
+                    } catch (IOException e1) {
 
-                }
+                    }
+                }).start();
             }
         }
     }
