@@ -87,7 +87,7 @@ public class TxtFinderTest {
         Assert.assertEquals(expected, actual);
     }
 
-    public List<File> createTxtFilesForThirdTest() throws IOException {
+    public List<File> createTxtFilesForThirdTest_BigFile() throws IOException {
         BufferedWriter bufferedWriter = null;
         File file1;
         try {
@@ -107,19 +107,18 @@ public class TxtFinderTest {
 
     public void textGeneratorBigFile(BufferedWriter bufferedWriter,File file) throws IOException {
         String txt="серве";
-//        int fileSize=1024*1024*100;
+//        int fileSize=1024*1024*1024;
         int fileSize=1024*1024;
         while (file.length()<fileSize) {
             bufferedWriter.write(txt);
         }
-        System.out.println(file.length());
         bufferedWriter.write("сервеР");
     }
 
     @Test
-    public void testGetFilesWithTxtMethod_Third() throws Exception {
+    public void testGetFilesWithTxtMethod_Third_BigFile() throws Exception {
         TxtFinder txtFinder = new TxtFinder();
-        List<File> filesForTest = createTxtFilesForThirdTest();
+        List<File> filesForTest = createTxtFilesForThirdTest_BigFile();
         List<File> actual = txtFinder.getFilesWithTxt(filesForTest, "сервеР");
 
         List<File> expected = new ArrayList<>(filesForTest);
@@ -128,9 +127,9 @@ public class TxtFinderTest {
     }
 
     @Test
-    public void testGetFilesWithTxtMethod_Fourth() throws Exception {
+    public void testGetFilesWithTxtMethod_Fourth_OneSearchWordOnTwoPages() throws Exception {
         TxtFinder txtFinder = new TxtFinder();
-        List<File> filesForTest = createTxtFilesForFourthTest();
+        List<File> filesForTest = createTxtFilesForFourthTest_OneSearchWordOnTwoPages();
         List<File> actual = txtFinder.getFilesWithTxt(filesForTest, "привет");
 
         List<File> expected = new ArrayList<>(filesForTest);
@@ -139,7 +138,7 @@ public class TxtFinderTest {
     }
 
 
-    public List<File> createTxtFilesForFourthTest() throws IOException {
+    public List<File> createTxtFilesForFourthTest_OneSearchWordOnTwoPages() throws IOException {
         BufferedWriter bufferedWriter = null;
         File file1;
         try {
