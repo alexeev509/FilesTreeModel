@@ -1,4 +1,4 @@
-import com.company.txt.classes.FilesValidation;
+import com.company.files.FilesValidation;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;

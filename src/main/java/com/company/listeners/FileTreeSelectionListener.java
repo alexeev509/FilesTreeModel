@@ -1,6 +1,6 @@
 package com.company.listeners;
 
-import com.company.txt.classes.TxtReader;
+import com.company.files.TxtReader;
 import com.company.view.MainWindow;
 
 import javax.swing.event.TreeSelectionEvent;

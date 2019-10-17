@@ -1,8 +1,8 @@
 package com.company.listeners;
 
+import com.company.files.FilesValidation;
+import com.company.files.TxtFinder;
 import com.company.structures.FileTreeModel;
-import com.company.txt.classes.FilesValidation;
-import com.company.txt.classes.TxtFinder;
 import com.company.view.MainWindow;
 
 import javax.swing.*;
