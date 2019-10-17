@@ -19,7 +19,7 @@ public class MainWindow extends JFrame {
     private JTextField extensionOfFileTextfield = new JTextField("txt", 20);
     private JLabel textForSearchLabel = new JLabel("Напишите текст для поиска (с учетом регистра):");
     private JLabel extensionOfFileLabel = new JLabel("Напишите расширение для файла (с учетом регистра)");
-    ImageIcon loadingIcon = new ImageIcon(MainWindow.class.getResource("/ajax-loader.gif"));
+    private ImageIcon loadingIcon = new ImageIcon(MainWindow.class.getResource("/ajax-loader.gif"));
     private JLabel loading = new JLabel("loading... ", loadingIcon, JLabel.CENTER);
     private GridBagConstraints c = new GridBagConstraints();
     private JTextArea textArea = new JTextArea();
@@ -162,18 +162,22 @@ public class MainWindow extends JFrame {
     public JFileChooser getFileChooser() {
         return fileChooser;
     }
-    
+
     public void startLoading() {
         if (scrollpaneForTree != null) {
             panel.remove(scrollpaneForTree);
-            panel.revalidate();
-            panel.repaint();
         }
+        paneOfArea.getVerticalScrollBar().removeAdjustmentListener(scrollAdjustmentListener);
+        textArea.setText("");
+        paneOfArea.setVisible(false);
         btnOpenDir.setEnabled(false);
         loading.setVisible(true);
+        panel.revalidate();
+        panel.repaint();
     }
 
     public void endLoading() {
+        paneOfArea.setVisible(true);
         loading.setVisible(false);
         btnOpenDir.setEnabled(true);
     }
