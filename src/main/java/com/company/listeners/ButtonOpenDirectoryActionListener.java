@@ -37,7 +37,7 @@ public class ButtonOpenDirectoryActionListener implements ActionListener {
             } else if ("".equals(textForSearch)) {
                 window.showMessageBox(MESSAGE_EMPTY_TEXT_FOR_SEARCH);
             } else {
-                File file = fileChooser.getCurrentDirectory();
+                File file = fileChooser.getSelectedFile();
                 window.startLoading();
                 new Thread(() ->
 

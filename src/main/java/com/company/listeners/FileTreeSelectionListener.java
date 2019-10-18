@@ -22,6 +22,10 @@ public class FileTreeSelectionListener implements TreeSelectionListener {
     @Override
     public void valueChanged(TreeSelectionEvent e) {
         String node = (String) e.getPath().getLastPathComponent();
+        if (System.getProperty("os.name").startsWith("Windows")) {
+            String[] split = node.split("/");
+            node = split[split.length - 1];
+        }
 
         if (node.endsWith("." + extensionOfFile)) {
             try {
