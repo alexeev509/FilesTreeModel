@@ -37,7 +37,7 @@ public class ButtonOpenDirectoryActionListener implements ActionListener {
             } else if ("".equals(textForSearch)) {
                 window.showMessageBox(MESSAGE_EMPTY_TEXT_FOR_SEARCH);
             } else {
-                File file = fileChooser.getSelectedFile();
+                File file = getFileForMacOrWindowsFileSystem(fileChooser);
                 window.startLoading();
                 new Thread(() ->
 
@@ -56,6 +56,15 @@ public class ButtonOpenDirectoryActionListener implements ActionListener {
                     }
                 }).start();
             }
+        }
+    }
+
+    //This is bad i think; I didn't test program on linux
+    private File getFileForMacOrWindowsFileSystem(JFileChooser fileChooser) {
+        if (System.getProperty("os.name").startsWith("Windows")) {
+            return fileChooser.getSelectedFile();
+        } else {
+            return fileChooser.getCurrentDirectory();
         }
     }
 }
