@@ -13,6 +13,8 @@
 ∙  приятный и интуитивно понятный интерфейс приложения;
 ∙  краткий и понятный исходный код.
 
+Program was tested on MAC OS and little tested on Windows; It wasn't tested on Linux;<br>
+On Windows it works only with English text;<br>
 This program can make search text in files on your hardware with specific extension.<br>
 The default extension is log (you will see it on textbox when programm will be run)<br>
 You can find big files (on my pc this program find search text in txt file which size is about 600mb.<br>
