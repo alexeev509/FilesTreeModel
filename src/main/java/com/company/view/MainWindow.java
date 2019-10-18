@@ -15,8 +15,8 @@ public class MainWindow extends JFrame {
     private JButton btnOpenDir = new JButton("Выбрать папку для поиска файла");
     private ActionListener btnOpenDirAction;
     private JPanel panel = new JPanel(new GridBagLayout());
-    private JTextField textForSearchTextfield = new JTextField("привет", 20);
-    private JTextField extensionOfFileTextfield = new JTextField("txt", 20);
+    private JTextField textForSearchTextfield = new JTextField(20);
+    private JTextField extensionOfFileTextfield = new JTextField("log", 20);
     private JLabel textForSearchLabel = new JLabel("Напишите текст для поиска (с учетом регистра):");
     private JLabel extensionOfFileLabel = new JLabel("Напишите расширение для файла (с учетом регистра)");
     private ImageIcon loadingIcon = new ImageIcon(MainWindow.class.getResource("/ajax-loader.gif"));
