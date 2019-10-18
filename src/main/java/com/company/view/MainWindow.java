@@ -49,8 +49,8 @@ public class MainWindow extends JFrame {
         addElementsToWindow();
 
         setSize(WIDTH_OF_THE_FRAME, HEIGHT_OF_THE_FRAME);
-        setVisible(true);
         setLocationRelativeTo(null);
+        setVisible(true);
     }
 
     private void addElementsToWindow() {
