@@ -21,13 +21,15 @@ public class FilesValidation {
             while (!queue.isEmpty()){
                 File currentFile = queue.poll();
                 File[] childrenOfCurrentFile = currentFile.listFiles();
-                for (int i = 0; i < childrenOfCurrentFile.length; i++) {
-                    if(childrenOfCurrentFile[i].isFile()){
-                        if (childrenOfCurrentFile[i].getName().endsWith("." + extension)) {
-                            listOfFiles.add(childrenOfCurrentFile[i]);
+                if (childrenOfCurrentFile != null) {
+                    for (int i = 0; i < childrenOfCurrentFile.length; i++) {
+                        if (childrenOfCurrentFile[i].isFile()) {
+                            if (childrenOfCurrentFile[i].getName().endsWith("." + extension)) {
+                                listOfFiles.add(childrenOfCurrentFile[i]);
+                            }
+                        } else if (childrenOfCurrentFile[i].isDirectory()) {
+                            queue.add(childrenOfCurrentFile[i]);
                         }
-                    }else if(childrenOfCurrentFile[i].isDirectory()) {
-                        queue.add(childrenOfCurrentFile[i]);
                     }
                 }
             }
