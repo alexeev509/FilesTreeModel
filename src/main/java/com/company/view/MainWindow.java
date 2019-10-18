@@ -46,11 +46,11 @@ public class MainWindow extends JFrame {
         super(TITLE);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
         addElementsToWindow();
 
         setSize(WIDTH_OF_THE_FRAME, HEIGHT_OF_THE_FRAME);
         setVisible(true);
+        setLocationRelativeTo(null);
     }
 
     private void addElementsToWindow() {
